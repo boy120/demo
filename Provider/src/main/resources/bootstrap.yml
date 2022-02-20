@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: provider #首个被加载配置:data-id 拼接的名称
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: test #首个被加载配置:data-id 拼接的profile
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8880
+        namespace: 61ea0a87-d718-4e23-9da5-9c910129418a  #公共命名空间
+        group: nacos #首个被加载配置:所在组
+        #prefix: provider #文件前缀
+        file-extension: yaml #首个被加载配置:data-id 拼接的后缀
+        refresh:
+          enabled=true: true #首个被加载配置:动态刷新
+      discovery:
+        group: nacos
+        namespace: 61ea0a87-d718-4e23-9da5-9c910129418a
+      server-addr: 127.0.0.1:8880
+    compatibility-verifier:
+      enabled: false #cloud 兼容性验证

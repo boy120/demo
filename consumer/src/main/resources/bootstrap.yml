@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: consumer #首个被加载配置:data-id 拼接的名称
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: test #首个被加载配置:data-id 拼接的profile
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8880
+      config:
+        server-addr: 127.0.0.1:8880
+        namespace: 61ea0a87-d718-4e23-9da5-9c910129418a  #公共命名空间
+        group: nacos #首个被加载配置:所在组
+        file-extension: yaml #首个被加载配置:data-id 拼接的后缀
+        refresh:
+          enabled=true: true #首个被加载配置:动态刷新
+      discovery:
+        namespace: 61ea0a87-d718-4e23-9da5-9c910129418a
+        group: nacos
+    compatibility-verifier:
+      enabled: false #cloud 兼容性验证
+
+feign:
+  client:
+    config:
+      default:
+        readTimeout: 4000 #建立连接所用的时间
+        connectTimeout: 4000 #指建立连接后从服务端读取到可用资源所用的时间,默认为1s
+logging:
+  level:
+    #对整个feign包开启日志增强功能
+    co,.nacos.client: debug
